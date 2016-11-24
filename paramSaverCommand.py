@@ -107,7 +107,7 @@ class paramSaveCommand(Fusion360NavCommandBase):
     def onCreate(self, command, inputs):
         
         # Create a few inputs in the UI
-        inputs.addStringValueInput('newName', 'New Config Name:', 'New Config')  
+        inputs.addStringValueInput('newName', 'New Parameter Set Name:', 'New Params')  
         
 ############# Create your Actions Here #################################################
 class paramSwitchCommand(Fusion360NavCommandBase):
@@ -139,7 +139,7 @@ class paramSwitchCommand(Fusion360NavCommandBase):
     # Runs when user selects your command from Fusion UI, Build UI here
     def onCreate(self, command, inputs):
         
-        dropDown = inputs.addDropDownCommandInput('currentState', 'Select Saved Config:', adsk.core.DropDownStyles.TextListDropDownStyle)
+        dropDown = inputs.addDropDownCommandInput('currentState', 'Select Saved Parameter Set:', adsk.core.DropDownStyles.TextListDropDownStyle)
         dropDownItems = dropDown.listItems
         dropDownItems.add('Current', True)
         
