@@ -16,14 +16,14 @@ commandResources2 = './resources/CS'
 cmdId2 = 'SWC_CmdId'
 
 #### Define parameters for 3rd command #####
-commandName3 = 'Display Save'
-commandDescription3 = 'Manage Display Of Components and Bodies'
+commandName3 = 'Save Display'
+commandDescription3 = 'Save Current Display State Of Components'
 commandResources3 = './resources/displaySave'
 cmdId3 = 'DisplaySave_CmdId'
 
 #### Define parameters for 3rd command #####
-commandName4 = 'Display Switch'
-commandDescription4 = 'Switch Display Of Components'
+commandName4 = 'Switch Display'
+commandDescription4 = 'Switch Display State Of Components'
 commandResources4 = './resources/displaySave'
 cmdId4 = 'DisplaySwitch_CmdId'
 
