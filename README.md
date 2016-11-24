@@ -4,7 +4,7 @@ Fusion 360 Addin to Save Display and Suppresion State
 ![State Saver Dialog](./resources/configSaverMenu.png)
 ## Installation:
 First see [How to install sample Add-Ins and Scripts](https://rawgit.com/AutodeskFusion360/AutodeskFusion360.github.io/master/Installation.html)
-... 
+
 
 ## Usage:
 This addin allows you to save and retrieve the suppresion of features and display of components in the graphics window.
@@ -26,7 +26,6 @@ See a video here: _TODO_
 
 **Unsuppress All** to simply unsuppress all features in the timeline.  This can be a useful utility when creating configurations.
 
-...
 
 ## Limitations
   * Currently no way to delete saved states
