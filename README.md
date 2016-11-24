@@ -7,7 +7,7 @@ First see [How to install sample Add-Ins and Scripts](https://rawgit.com/Autodes
 
 This addin allows you to save and retrieve the suppresion of features and display of components in the graphics window.
 
-See a video here: TODO
+See a video here: _TODO_
 
 Select **Save Configuration** to save the current suppression state of all features in the timeline.
 
