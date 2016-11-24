@@ -26,6 +26,13 @@ See a video here: _TODO_
 
 **Unsuppress All** will simply unsuppress all features in the timeline.  This can be a useful utility when creating configurations.
 
+**Save Parameters** will save the current value of all user parameters in the design.
+
+**Switch Parameters** allows you to select a saved set of parameters from the drop down. 
+- New paramters added after the state was saved will retain their current value.  
+- Selecting Current or cancel will revert to the value of all parameters when you entered the command.
+
+**Edit Parameters** allows you to easily modify the values of all user parameters.  See realtime feedback on the changes.
 
 ## Limitations
   * Currently no way to delete saved states
