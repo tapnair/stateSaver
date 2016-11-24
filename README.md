@@ -19,7 +19,7 @@ Select **Switch Display** and select a saved display state from the drop down it
 
 **Note: When selecting objects in the graphics window to "Hide" it is common that you are actually selecting the body NOT the component.  This add-in will only work if you are hiding and showing at the component level.**
 
-Alternatively you can select "Unsuppress All"  and it will simply unsuppress all features in the timeline.  
+Select **Unsuppress All** to simply unsuppress all features in the timeline.  This can be a useful utility when creating configurations.
 
 ## Limitations
   * Currently no way to delete saved states
