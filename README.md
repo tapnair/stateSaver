@@ -17,14 +17,14 @@ See a video here: _TODO_
 - New features added after the state was saved will retain their current state.  
 - Selecting Current or cancel will revert to the suppression state of all components when you entered the command.
 
-**Save Display** to save the current display state (lightbulb on/off) of all _components_ in the timeline.
+**Save Display** will save the current display state (lightbulb on/off) of all _components_ in the timeline.
 
 **Switch Display** allows you to select a saved display state from the drop down. The display of _components_ will revert to that previously saved condition.  
 - New parts added after the state was saved will retain their current state.  
 - Selecting Current or cancel will revert to the display state of all components when you entered the command.
 - **Note: When selecting objects in the graphics window to "Hide" it is common that you are actually selecting the body NOT the component.  This add-in will only work if you are hiding and showing at the component level.**
 
-**Unsuppress All** to simply unsuppress all features in the timeline.  This can be a useful utility when creating configurations.
+**Unsuppress All** will simply unsuppress all features in the timeline.  This can be a useful utility when creating configurations.
 
 
 ## Limitations
