@@ -10,7 +10,7 @@ First see [How to install sample Add-Ins and Scripts](https://rawgit.com/Autodes
 This addin allows you to save and retrieve:
  - The suppresion of features in the timeline 
  - The display of components in the graphics window
- - THe values of user defined parameters in the design
+ - The values of user defined parameters in the design
 
 See a video here: _TODO_
 
