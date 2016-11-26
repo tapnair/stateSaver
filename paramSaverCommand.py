@@ -4,11 +4,14 @@ from xml.etree import ElementTree
 from xml.etree.ElementTree import SubElement
 
 from .Fusion360CommandBase import Fusion360NavCommandBase
+from .stateSaverFunctions import build_drop_down, process_values, save_values
+
 
 groupName = 'tapnair-stateSaver'
 attribName = 'paramSaver'
+rootName = 'paramSaves'
 
-def write_XML_paramState(root, newState):
+def write_XML_param_state(root, newState):
     
     app = adsk.core.Application.get()
     design = adsk.fusion.Design.cast(app.activeProduct)
@@ -27,7 +30,7 @@ def write_XML_paramState(root, newState):
     
     design.attributes.add(groupName, attribName, xmlstr)
 
-def read_XML_paramState(root, state):
+def read_XML_param_state(root, state):
     app = adsk.core.Application.get()
     design = adsk.fusion.Design.cast(app.activeProduct)
 
@@ -40,21 +43,6 @@ def read_XML_paramState(root, state):
             test = root.find("state[@name='%s']/parameter[@name='%s']" % (state, param.name))
             if test is not None:
                 param.value = float(test.get('value'))
-                
-def getXML_from_Attribute(groupName, attributeName):
-    app = adsk.core.Application.get()
-    design_ = adsk.fusion.Design.cast(app.activeProduct)
-
-    attrib = design_.attributes.itemByName(groupName, attributeName)
-    
-    # Get XML Root node
-    if attrib is not None:
-        root = ElementTree.fromstring(attrib.value)
-        
-    else:
-        root = ElementTree.Element('paramSaves')
-
-    return root
 
 def updateParams(inputs):
     
@@ -100,8 +88,7 @@ class paramSaveCommand(Fusion360NavCommandBase):
     
     # Runs when the user presses ok button
     def onExecute(self, command, inputs):
-        root = getXML_from_Attribute(groupName, attribName)
-        write_XML_paramState(root, inputs.itemById('newName').value)
+        save_values(inputs, groupName, attribName, write_XML_param_state, rootName)
     
     # Runs when user selects your command from Fusion UI, Build UI here
     def onCreate(self, command, inputs):
@@ -114,11 +101,7 @@ class paramSwitchCommand(Fusion360NavCommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):
-        state = inputs.itemById('currentState').selectedItem.name
-        if state != 'Current':
-            root = getXML_from_Attribute(groupName, attribName)
-            if root:
-                read_XML_paramState(root, state)
+        process_values(inputs, groupName, attribName, read_XML_param_state, rootName)
     
     # Runs when the command is destroyed.  Sometimes useful for cleanup after the fact
     def onDestroy(self, command, inputs, reason_):    
@@ -131,22 +114,12 @@ class paramSwitchCommand(Fusion360NavCommandBase):
     # Runs when the user presses ok button
     def onExecute(self, command, inputs):
 
-        state = inputs.itemById('currentState').selectedItem.name
-        root = getXML_from_Attribute(groupName, attribName)
-        if root:
-            read_XML_paramState(root, state)
+        process_values(inputs, groupName, attribName, read_XML_param_state, rootName)
 
     # Runs when user selects your command from Fusion UI, Build UI here
     def onCreate(self, command, inputs):
         
-        dropDown = inputs.addDropDownCommandInput('currentState', 'Select Saved Parameter Set:', adsk.core.DropDownStyles.TextListDropDownStyle)
-        dropDownItems = dropDown.listItems
-        dropDownItems.add('Current', True)
-        
-        root = getXML_from_Attribute(groupName, attribName)
-        if root:
-            for state in root.findall('state'):
-                dropDownItems.add(state.get('name'), False,)
+        build_drop_down(inputs, 'Select Saved Parameter Set:', groupName, attribName, rootName)
 
 ############# Create your Actions Here #################################################
 class paramEditCommand(Fusion360NavCommandBase):

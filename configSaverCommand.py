@@ -1,5 +1,7 @@
 import adsk.core, adsk.fusion, traceback
 
+from .stateSaverFunctions import build_drop_down, process_values, save_values
+
 from xml.etree import ElementTree
 from xml.etree.ElementTree import SubElement
 
@@ -7,6 +9,8 @@ from .Fusion360CommandBase import Fusion360NavCommandBase
 
 groupName = 'tapnair-stateSaver'
 attribName = 'configSaver'
+rootName = 'configSaves'
+
 def write_XML_suppressState(root, newState):
     
     app = adsk.core.Application.get()
@@ -53,14 +57,11 @@ def read_XML_suppressState(root, state):
                 test = root.find("state[@name='%s']/feature[@name='%s'][@component='%s']" % (state, feature.name, comp.name))
                 if test is not None:
                     if test.get('suppress') == 'suppressed':
-                        # ui.messageBox(str(feature.name) + " Is Suppressed")
                         feature.timelineObject.isSuppressed = True
                     else:
-                        # ui.messageBox(str(feature.name) + " Is Unsuppressed")
                         feature.timelineObject.isSuppressed = False
 
 def unsuppressAll():
-
     app = adsk.core.Application.get()
     design = adsk.fusion.Design.cast(app.activeProduct)
 
@@ -76,20 +77,7 @@ def unsuppressAll():
             if feature is not None:
                 feature.timelineObject.isSuppressed = False
 
-def getXML_from_Attribute(groupName, attributeName):
-    app = adsk.core.Application.get()
-    design_ = adsk.fusion.Design.cast(app.activeProduct)
 
-    attrib = design_.attributes.itemByName(groupName, attributeName)
-    
-    # Get XML Root node
-    if attrib is not None:
-        root = ElementTree.fromstring(attrib.value)
-        
-    else:
-        root = ElementTree.Element('configSaves')
-
-    return root
 
 
 ############# Create your Actions Here #################################################
@@ -109,8 +97,7 @@ class configSaveCommand(Fusion360NavCommandBase):
     
     # Runs when the user presses ok button
     def onExecute(self, command, inputs):
-        root = getXML_from_Attribute(groupName, attribName)
-        write_XML_suppressState(root, inputs.itemById('newName').value)
+        save_values(inputs, groupName, attribName, write_XML_suppressState, rootName)
     
     # Runs when user selects your command from Fusion UI, Build UI here
     def onCreate(self, command, inputs):
@@ -123,11 +110,7 @@ class configSwitchCommand(Fusion360NavCommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):
-        state = inputs.itemById('currentState').selectedItem.name
-        if state != 'Current':
-            root = getXML_from_Attribute(groupName, attribName)
-            if root:
-                read_XML_suppressState(root, state)
+        process_values(inputs, groupName, attribName, read_XML_suppressState, rootName)
     
     # Runs when the command is destroyed.  Sometimes useful for cleanup after the fact
     def onDestroy(self, command, inputs, reason_):    
@@ -139,23 +122,11 @@ class configSwitchCommand(Fusion360NavCommandBase):
     
     # Runs when the user presses ok button
     def onExecute(self, command, inputs):
-
-        state = inputs.itemById('currentState').selectedItem.name
-        root = getXML_from_Attribute(groupName, attribName)
-        if root:
-            read_XML_suppressState(root, state)
+        process_values(inputs, groupName, attribName, read_XML_suppressState, rootName)
 
     # Runs when user selects your command from Fusion UI, Build UI here
     def onCreate(self, command, inputs):
-        
-        dropDown = inputs.addDropDownCommandInput('currentState', 'Select Saved Config:', adsk.core.DropDownStyles.TextListDropDownStyle)
-        dropDownItems = dropDown.listItems
-        dropDownItems.add('Current', True)
-        
-        root = getXML_from_Attribute(groupName, attribName)
-        if root:
-            for state in root.findall('state'):
-                dropDownItems.add(state.get('name'), False,)
+        build_drop_down(inputs, 'Select Saved Config:', groupName, attribName, rootName)
 
 ############# Create your Actions Here #################################################
 class unsuppressAllCommand(Fusion360NavCommandBase):
