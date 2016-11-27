@@ -13,6 +13,9 @@ cmd = {
         'commandDescription' : 'Saves the current State of suppression in the model',
         'commandResources' : './resources/CS',
         'cmdId' : 'CS_CmdId',
+        'DC_Resources' : './resources/DC',
+        'DC_CmdId' : 'stateSaver',
+        'command_in_nav_bar' : True,
         'class' : configSaveCommand
 }
 command_defs.append(cmd)
@@ -23,6 +26,9 @@ cmd = {
         'commandDescription' : 'Allows you to switch to existing Configurations in the Model',
         'commandResources' : './resources/CS',
         'cmdId' : 'SWC_CmdId',
+        'DC_Resources' : './resources/DC',
+        'DC_CmdId' : 'stateSaver',
+        'command_in_nav_bar' : True,
         'class' : configSwitchCommand
 }
 command_defs.append(cmd)
@@ -33,6 +39,9 @@ cmd = {
         'commandDescription' : 'Save Current Display State Of Components',
         'commandResources' : './resources/displaySave',
         'cmdId' : 'DisplaySave_CmdId',
+        'DC_Resources' : './resources/DC',
+        'DC_CmdId' : 'stateSaver',
+        'command_in_nav_bar' : True,
         'class' : displaySaveCommand
 }
 command_defs.append(cmd)
@@ -43,6 +52,9 @@ cmd = {
         'commandDescription' : 'Switch Display State Of Components',
         'commandResources' : './resources/displaySave',
         'cmdId' : 'DisplaySwitch_CmdId',
+        'DC_Resources' : './resources/DC',
+        'DC_CmdId' : 'stateSaver',
+        'command_in_nav_bar' : True,
         'class' : displaySwitchCommand
 }
 command_defs.append(cmd)
@@ -53,6 +65,9 @@ cmd = {
         'commandDescription' : 'Unsuppresses all features in the timeline',
         'commandResources' : './resources/CS',
         'cmdId' : 'unsuppressAll_CmdId',
+        'DC_Resources' : './resources/DC',
+        'DC_CmdId' : 'stateSaver',
+        'command_in_nav_bar' : True,
         'class' : unsuppressAllCommand
 }
 command_defs.append(cmd)
@@ -63,6 +78,9 @@ cmd = {
         'commandDescription' : 'Quickly Edit User Parameters',
         'commandResources' : './resources/CS',
         'cmdId' : 'EP_CmdId',
+        'DC_Resources' : './resources/DC',
+        'DC_CmdId' : 'stateSaver',
+        'command_in_nav_bar' : True,
         'class' : paramEditCommand
 }
 command_defs.append(cmd)
@@ -73,6 +91,9 @@ cmd = {
         'commandDescription' : 'Save the Values of all User Parameters',
         'commandResources' : './resources/CS',
         'cmdId' : 'SP_CmdId',
+        'DC_Resources' : './resources/DC',
+        'DC_CmdId' : 'stateSaver',
+        'command_in_nav_bar' : True,
         'class' : paramSaveCommand
 }
 command_defs.append(cmd)
@@ -83,21 +104,19 @@ cmd = {
         'commandDescription' : 'Switch between saved sets of user Parameters',
         'commandResources' : './resources/CS',
         'cmdId' : 'SWP_CmdId',
+        'DC_Resources' : './resources/DC',
+        'DC_CmdId' : 'stateSaver',
+        'command_in_nav_bar' : True,
         'class' : paramSwitchCommand
 }
 command_defs.append(cmd)
-
-
-#### Define parameters for Drop Down Command #####
-DC_Resources = './resources/DC'
-DC_CmdId = 'stateSaver'
 
 # Set to True to display various useful messages when debugging your app
 debug = False
 
 for cmd_def in command_defs:
     # Creates the commands for use in the Fusion 360 UI
-    command = cmd_def['class'](cmd_def['commandName'], cmd_def['commandDescription'], cmd_def['commandResources'], cmd_def['cmdId'], DC_CmdId, DC_Resources, debug)
+    command = cmd_def['class'](cmd_def, debug)
     commands.append(command)
 
 def run(context):

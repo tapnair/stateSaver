@@ -3,7 +3,7 @@ import adsk.core, adsk.fusion, traceback
 from xml.etree import ElementTree
 from xml.etree.ElementTree import SubElement
 
-from .Fusion360CommandBase import Fusion360NavCommandBase
+from .Fusion360CommandBase import Fusion360CommandBase
 from .stateSaverFunctions import build_drop_down, process_values, save_values
 
 
@@ -72,7 +72,7 @@ def updateParams(inputs):
                             inputExpresion)
 
 ############# Create your Actions Here #################################################
-class paramSaveCommand(Fusion360NavCommandBase):
+class paramSaveCommand(Fusion360CommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):
@@ -97,7 +97,7 @@ class paramSaveCommand(Fusion360NavCommandBase):
         inputs.addStringValueInput('newName', 'New Parameter Set Name:', 'New Params')  
         
 ############# Create your Actions Here #################################################
-class paramSwitchCommand(Fusion360NavCommandBase):
+class paramSwitchCommand(Fusion360CommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):
@@ -122,7 +122,7 @@ class paramSwitchCommand(Fusion360NavCommandBase):
         build_drop_down(inputs, 'Select Saved Parameter Set:', groupName, attribName, rootName)
 
 ############# Create your Actions Here #################################################
-class paramEditCommand(Fusion360NavCommandBase):
+class paramEditCommand(Fusion360CommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):

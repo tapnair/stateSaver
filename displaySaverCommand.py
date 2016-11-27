@@ -3,7 +3,7 @@ import adsk.core, adsk.fusion, traceback
 from xml.etree import ElementTree
 from xml.etree.ElementTree import SubElement
 
-from .Fusion360CommandBase import Fusion360NavCommandBase
+from .Fusion360CommandBase import Fusion360CommandBase
 from .stateSaverFunctions import build_drop_down, process_values, save_values
 
 groupName = 'tapnair-stateSaver'
@@ -47,7 +47,7 @@ def read_XML_display_state(root, state):
             
             
 ############# Create your Actions Here #################################################
-class displaySaveCommand(Fusion360NavCommandBase):
+class displaySaveCommand(Fusion360CommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):
@@ -74,7 +74,7 @@ class displaySaveCommand(Fusion360NavCommandBase):
         inputs.addStringValueInput('newName', 'New Display Name:', 'New Display') 
 
 ############# Create your Actions Here #################################################
-class displaySwitchCommand(Fusion360NavCommandBase):
+class displaySwitchCommand(Fusion360CommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):

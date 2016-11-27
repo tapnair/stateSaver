@@ -5,7 +5,7 @@ from .stateSaverFunctions import build_drop_down, process_values, save_values
 from xml.etree import ElementTree
 from xml.etree.ElementTree import SubElement
 
-from .Fusion360CommandBase import Fusion360NavCommandBase
+from .Fusion360CommandBase import Fusion360CommandBase
 
 groupName = 'tapnair-stateSaver'
 attribName = 'configSaver'
@@ -81,7 +81,7 @@ def unsuppressAll():
 
 
 ############# Create your Actions Here #################################################
-class configSaveCommand(Fusion360NavCommandBase):
+class configSaveCommand(Fusion360CommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):
@@ -106,7 +106,7 @@ class configSaveCommand(Fusion360NavCommandBase):
         inputs.addStringValueInput('newName', 'New Config Name:', 'New Config')  
         
 ############# Create your Actions Here #################################################
-class configSwitchCommand(Fusion360NavCommandBase):
+class configSwitchCommand(Fusion360CommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):
@@ -129,7 +129,7 @@ class configSwitchCommand(Fusion360NavCommandBase):
         build_drop_down(inputs, 'Select Saved Config:', groupName, attribName, rootName)
 
 ############# Create your Actions Here #################################################
-class unsuppressAllCommand(Fusion360NavCommandBase):
+class unsuppressAllCommand(Fusion360CommandBase):
     
     # Runs when Fusion command would generate a preview after all inputs are valid or changed
     def onPreview(self, command, inputs):
