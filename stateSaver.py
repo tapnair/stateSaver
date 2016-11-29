@@ -1,8 +1,12 @@
 # Importing sample Fusion Command
 # Could import multiple Command definitions here
-from .configSaverCommand import configSaveCommand, configSwitchCommand, unsuppressAllCommand
-from .displaySaverCommand import displaySaveCommand, displaySwitchCommand
-from .paramSaverCommand import paramSaveCommand, paramSwitchCommand, paramEditCommand
+from .configSaverCommand import write_XML_suppressState, read_XML_suppressState
+from .displaySaverCommand import write_XML_display_state, read_XML_display_state
+from .paramSaverCommand import write_XML_param_state, read_XML_param_state
+from .stateSaverCommand import stateSaveCommand, stateSwitchCommand
+from .unsuppressAllCommand import unsuppressAllCommand
+from .paramEditCommand import paramEditCommand
+
 
 commands = []
 command_defs =[]
@@ -16,7 +20,9 @@ cmd = {
         'DC_Resources' : './resources/DC',
         'DC_CmdId' : 'stateSaver',
         'command_in_nav_bar' : True,
-        'class' : configSaveCommand
+        'class' : stateSaveCommand,
+        'stateType' : 'config',
+        'write_function' : write_XML_suppressState
 }
 command_defs.append(cmd)
 
@@ -29,7 +35,9 @@ cmd = {
         'DC_Resources' : './resources/DC',
         'DC_CmdId' : 'stateSaver',
         'command_in_nav_bar' : True,
-        'class' : configSwitchCommand
+        'class' : stateSwitchCommand,
+        'stateType' : 'config',
+        'read_function' : read_XML_suppressState
 }
 command_defs.append(cmd)
 
@@ -42,7 +50,9 @@ cmd = {
         'DC_Resources' : './resources/DC',
         'DC_CmdId' : 'stateSaver',
         'command_in_nav_bar' : True,
-        'class' : displaySaveCommand
+        'class' : stateSaveCommand,
+        'stateType' : 'display',
+        'write_function' : write_XML_display_state
 }
 command_defs.append(cmd)
 
@@ -55,7 +65,9 @@ cmd = {
         'DC_Resources' : './resources/DC',
         'DC_CmdId' : 'stateSaver',
         'command_in_nav_bar' : True,
-        'class' : displaySwitchCommand
+        'class' : stateSwitchCommand,
+        'stateType' : 'display',
+        'read_function' : read_XML_display_state
 }
 command_defs.append(cmd)
 
@@ -94,7 +106,9 @@ cmd = {
         'DC_Resources' : './resources/DC',
         'DC_CmdId' : 'stateSaver',
         'command_in_nav_bar' : True,
-        'class' : paramSaveCommand
+        'class' : stateSaveCommand,
+        'stateType' : 'param',
+        'write_function' : write_XML_param_state
 }
 command_defs.append(cmd)
 
@@ -107,7 +121,9 @@ cmd = {
         'DC_Resources' : './resources/DC',
         'DC_CmdId' : 'stateSaver',
         'command_in_nav_bar' : True,
-        'class' : paramSwitchCommand
+        'class' : stateSwitchCommand,
+        'stateType' : 'param',
+        'read_function' : read_XML_param_state
 }
 command_defs.append(cmd)
 

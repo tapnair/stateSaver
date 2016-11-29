@@ -39,5 +39,16 @@ def process_values(inputs, groupName, attribName, xml_read_function, rootName):
 
 # Saves values for the given state type into proper attribute XML          
 def save_values(inputs, groupName, attribName, xml_write_function, rootName):
+    app = adsk.core.Application.get()
+    design = adsk.fusion.Design.cast(app.activeProduct)
+    
     root = get_XML_from_attribute(groupName, attribName, rootName)
-    xml_write_function(root, inputs.itemById('newName').value)
+    
+    xmlstr = xml_write_function(root, inputs.itemById('newName').value, design)
+    
+    design.attributes.add(groupName, attribName, xmlstr)    
+    
+    
+    
+    
+    
