@@ -2,8 +2,13 @@
 Fusion 360 Addin to Save Display,Suppresion and Parameter State
 
 ![State Saver Dialog](./resources/configSaverMenu.png)
-## Installation:
-First see [How to install sample Add-Ins and Scripts](https://rawgit.com/AutodeskFusion360/AutodeskFusion360.github.io/master/Installation.html)
+
+# Installation
+[Click here to download the Add-in](https://github.com/tapnair/stateSaver/releases/download/v1.0/stateSaver.zip)
+
+_Note that due to submodules used in this project you need to use the above link to download, unless you are familiar with using terminal commands to pull github repos_
+
+After downloading the zip file follow the [installation instructions here](https://tapnair.github.io/installation.html) for your particular OS version of Fusion 360 
 
 
 ## Usage:
