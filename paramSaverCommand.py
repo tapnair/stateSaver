@@ -1,31 +1,35 @@
-import adsk.core, adsk.fusion, traceback
-
 from xml.etree import ElementTree
 from xml.etree.ElementTree import SubElement
 
-def write_XML_param_state(root, newState, design):
+import adsk.core
+import adsk.fusion
+import traceback
+
+
+def write_xml_param_state(root, new_state, design):
     
     # Create a new State in the xml tree
-    state = SubElement( root, 'state', name=newState)
+    state = SubElement(root, 'state', name=new_state)
 
-    userParams = design.userParameters
-    for param in userParams:
+    user_params = design.userParameters
+    for param in user_params:
    
         # Record parameter value state
         if param is not None:               
-            SubElement( state, 'parameter', value=str(param.value), name=param.name)    
+            SubElement(state, 'parameter', value=str(param.value), name=param.name)
     
-    xmlstr = ElementTree.tostring(root, encoding='unicode', method='xml')
+    xml_string = ElementTree.tostring(root, encoding='unicode', method='xml')
     
-    return xmlstr
-    
-def read_XML_param_state(root, state):
+    return xml_string
+
+
+def read_xml_param_state(root, state):
     app = adsk.core.Application.get()
     design = adsk.fusion.Design.cast(app.activeProduct)
 
     # Get All parameters in design
-    allParams = design.allParameters
-    for param in allParams:
+    all_params = design.allParameters
+    for param in all_params:
 
         # Apply Saved dimension info
         if param is not None:                       

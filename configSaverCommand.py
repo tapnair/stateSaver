@@ -1,45 +1,50 @@
-import adsk.core, adsk.fusion, traceback
-
 from xml.etree import ElementTree
 from xml.etree.ElementTree import SubElement
 
-def write_XML_suppressState(root, newState, design):
+import adsk.core
+import adsk.fusion
+import traceback
+
+
+# TODO rewrite to simply walk the timeline.  Not components features.
+def write_xml_suppress_state(root, new_state, design):
    
     # Create a new State in the xml tree
-    state = SubElement( root, 'state', name=newState)
+    state = SubElement(root, 'state', name=new_state)
 
-    # Get All components in design and itterate
-    allComponents = design.allComponents
-    for comp in allComponents:
+    # Get All components in design and iterate
+    all_components = design.allComponents
+    for comp in all_components:
         
         # Get All features inside the component
-        allFeatures = comp.features
-        for feature in allFeatures:
+        all_features = comp.features
+        for feature in all_features:
             
             # Record feature suppression state
             if feature is not None:               
                 if feature.timelineObject.isSuppressed:                               
                     # ui.messageBox(str(feature.name) + " Is Suppressed")
-                    SubElement( state, 'feature', component=comp.name, name=feature.name, suppress = 'suppressed')
+                    SubElement(state, 'feature', component=comp.name, name=feature.name, suppress = 'suppressed')
                 else:
                     # ui.messageBox(str(feature.name) + " Is Unsuppressed")
-                    SubElement( state, 'feature', component=comp.name, name=feature.name, suppress = 'unSuppressed')
+                    SubElement(state, 'feature', component=comp.name, name=feature.name, suppress = 'unSuppressed')
     
-    xmlstr = ElementTree.tostring(root, encoding='unicode', method='xml')
+    xml_string = ElementTree.tostring(root, encoding='unicode', method='xml')
     
-    return xmlstr
+    return xml_string
 
-def read_XML_suppressState(root, state):
+
+def read_xml_suppress_state(root, state):
     app = adsk.core.Application.get()
     design = adsk.fusion.Design.cast(app.activeProduct)
 
     # Get All components in design
-    allComponents = design.allComponents
-    for comp in allComponents:
+    all_components = design.allComponents
+    for comp in all_components:
         
         # Get All features inside the component
-        allFeatures = comp.features
-        for feature in allFeatures:
+        all_features = comp.features
+        for feature in all_features:
             
             # Find feature saved state and set value
             if feature is not None:

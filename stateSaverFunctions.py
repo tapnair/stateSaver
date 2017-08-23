@@ -1,54 +1,74 @@
-import adsk.core, adsk.fusion, traceback
-
 from xml.etree import ElementTree
 
-# Reads XML data from attribute 
-def get_XML_from_attribute(groupName, attributeName, rootName):
+import adsk.core
+import adsk.fusion
+import traceback
+
+
+# Reads XML data from attribute returns element tree root element
+def get_xml_from_attribute(group_name, attribute_name, root_name):
     app = adsk.core.Application.get()
     design_ = adsk.fusion.Design.cast(app.activeProduct)
 
-    attrib = design_.attributes.itemByName(groupName, attributeName)
+    attrib = design_.attributes.itemByName(group_name, attribute_name)
     
     # Get XML Root node
     if attrib is not None:
         root = ElementTree.fromstring(attrib.value)
         
     else:
-        root = ElementTree.Element(rootName)
+        root = ElementTree.Element(root_name)
 
     return root
 
-# Builds a dropdown menu for all states of the given type
-def build_drop_down(inputs, title, groupName, attribName, rootName):
-    dropDown = inputs.addDropDownCommandInput('currentState', title, adsk.core.DropDownStyles.TextListDropDownStyle)
-    dropDownItems = dropDown.listItems
-    dropDownItems.add('Current', True)
-    
-    root = get_XML_from_attribute(groupName, attribName, rootName)
+
+# Builds a drop down menu for all states of the given type
+def build_drop_down(inputs, title, group_name, attrib_name, root_name, is_check_box=False):
+
+    if is_check_box:
+        drop_down = inputs.addDropDownCommandInput('select_state', title,
+                                                   adsk.core.DropDownStyles.CheckBoxDropDownStyle)
+        drop_down_items = drop_down.listItems
+
+    else:
+        drop_down = inputs.addDropDownCommandInput('currentState', title,
+                                                   adsk.core.DropDownStyles.TextListDropDownStyle)
+        drop_down_items = drop_down.listItems
+        drop_down_items.add('Current', True)
+
+    update_drop_down(drop_down_items, group_name, attrib_name, root_name)
+
+
+def update_drop_down(drop_down_items, group_name, attrib_name, root_name):
+
+    root = get_xml_from_attribute(group_name, attrib_name, root_name)
+
     if root:
         for state in root.findall('state'):
-            dropDownItems.add(state.get('name'), False,)
+            drop_down_items.add(state.get('name'), False, )
+
 
 # Processes values from a state if a new one is selected
-def process_values(inputs, groupName, attribName, xml_read_function, rootName):
+def process_values(inputs, group_name, attrib_name, xml_read_function, root_name):
+
     state = inputs.itemById('currentState').selectedItem.name
+
     if state != 'Current':
-        root = get_XML_from_attribute(groupName, attribName, rootName)
+        root = get_xml_from_attribute(group_name, attrib_name, root_name)
+
         if root:
             xml_read_function(root, state)
 
+
 # Saves values for the given state type into proper attribute XML          
-def save_values(inputs, groupName, attribName, xml_write_function, rootName):
+def save_values(inputs, group_name, attrib_name, xml_write_function, root_name):
+
     app = adsk.core.Application.get()
     design = adsk.fusion.Design.cast(app.activeProduct)
     
-    root = get_XML_from_attribute(groupName, attribName, rootName)
+    root = get_xml_from_attribute(group_name, attrib_name, root_name)
     
-    xmlstr = xml_write_function(root, inputs.itemById('newName').value, design)
+    xml_string = xml_write_function(root, inputs.itemById('newName').value, design)
     
-    design.attributes.add(groupName, attribName, xmlstr)    
-    
-    
-    
-    
-    
+    design.attributes.add(group_name, attrib_name, xml_string)
+
