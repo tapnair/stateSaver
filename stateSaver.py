@@ -10,35 +10,35 @@ from .ParamEditCommand import ParamEditCommand
 commands = []
 command_defs = []
 
-# Define parameters for command
-cmd = {
-    'commandName': 'Save Configuration',
-    'commandDescription': 'Saves the current State of suppression in the model',
-    'commandResources': './resources/CS',
-    'cmdId': 'CS_CmdId',
-    'DC_Resources': './resources/DC',
-    'DC_CmdId': 'stateSaver',
-    'command_in_nav_bar': True,
-    'class': StateSaveCommand,
-    'stateType': 'config',
-    'write_function': write_xml_suppress_state
-}
-command_defs.append(cmd)
-
-# Define parameters for command
-cmd = {
-    'commandName': 'Switch Configuration',
-    'commandDescription': 'Allows you to switch to existing Configurations in the Model',
-    'commandResources': './resources/CS',
-    'cmdId': 'SWC_CmdId',
-    'DC_Resources': './resources/DC',
-    'DC_CmdId': 'stateSaver',
-    'command_in_nav_bar': True,
-    'class': StateSwitchCommand,
-    'stateType': 'config',
-    'read_function': read_xml_suppress_state
-}
-command_defs.append(cmd)
+# # Define parameters for command
+# cmd = {
+#     'commandName': 'Save Configuration',
+#     'commandDescription': 'Saves the current State of suppression in the model',
+#     'commandResources': './resources/CS',
+#     'cmdId': 'CS_CmdId',
+#     'DC_Resources': './resources/DC',
+#     'DC_CmdId': 'stateSaver',
+#     'command_in_nav_bar': True,
+#     'class': StateSaveCommand,
+#     'stateType': 'config',
+#     'write_function': write_xml_suppress_state
+# }
+# command_defs.append(cmd)
+#
+# # Define parameters for command
+# cmd = {
+#     'commandName': 'Switch Configuration',
+#     'commandDescription': 'Allows you to switch to existing Configurations in the Model',
+#     'commandResources': './resources/CS',
+#     'cmdId': 'SWC_CmdId',
+#     'DC_Resources': './resources/DC',
+#     'DC_CmdId': 'stateSaver',
+#     'command_in_nav_bar': True,
+#     'class': StateSwitchCommand,
+#     'stateType': 'config',
+#     'read_function': read_xml_suppress_state
+# }
+# command_defs.append(cmd)
 
 # Define parameters for command
 cmd = {
@@ -70,18 +70,18 @@ cmd = {
 }
 command_defs.append(cmd)
 
-# Define parameters for command
-cmd = {
-    'commandName': 'Unsuppress All',
-    'commandDescription': 'Unsuppresses all features in the timeline',
-    'commandResources': './resources/CS',
-    'cmdId': 'unsuppressAll_CmdId',
-    'DC_Resources': './resources/DC',
-    'DC_CmdId': 'stateSaver',
-    'command_in_nav_bar': True,
-    'class': UnSuppressAllCommand
-}
-command_defs.append(cmd)
+# # Define parameters for command
+# cmd = {
+#     'commandName': 'Unsuppress All',
+#     'commandDescription': 'Unsuppresses all features in the timeline',
+#     'commandResources': './resources/CS',
+#     'cmdId': 'unsuppressAll_CmdId',
+#     'DC_Resources': './resources/DC',
+#     'DC_CmdId': 'stateSaver',
+#     'command_in_nav_bar': True,
+#     'class': UnSuppressAllCommand
+# }
+# command_defs.append(cmd)
 
 # Define parameters for command
 cmd = {
