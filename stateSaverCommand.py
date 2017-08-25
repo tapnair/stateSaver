@@ -105,8 +105,8 @@ class DeleteStates(Fusion360CommandBase):
                     self.stateType = 'param'
                 elif changed_input.selectedItem.name == 'Display':
                     self.stateType = 'display'
-                elif changed_input.selectedItem.name == 'Suppression':
-                    self.stateType = 'config'
+                # elif changed_input.selectedItem.name == 'Suppression':
+                #     self.stateType = 'config'
 
                 self.attribName = self.stateType + 'Saver'
                 self.rootName = self.stateType + 'Saves'
@@ -123,7 +123,7 @@ class DeleteStates(Fusion360CommandBase):
                                                           adsk.core.DropDownStyles.LabeledIconDropDownStyle)
         state_type_input.listItems.add('Parameters', True)
         state_type_input.listItems.add('Display', False)
-        state_type_input.listItems.add('Suppression', False)
+        # state_type_input.listItems.add('Suppression', False)
 
         build_drop_down(inputs, 'Select Saved ' + self.stateType + ' to delete:',
                         self.groupName, self.attribName, self.rootName, True)
