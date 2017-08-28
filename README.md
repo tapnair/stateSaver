@@ -24,15 +24,15 @@ This addin allows you to save and retrieve:
 - Selecting Current or cancel will revert to the display state of all components when you entered the command.
 - **Note: When selecting objects in the graphics window to "Hide" it is common that you are actually selecting the body NOT the component.  This add-in will only work if you are hiding and showing at the component level.**
 
-### Parmeter State
+### Parameter State
 **Save Parameters** will save the current value of all _user_ parameters in the design.
 
 **Switch Parameters** allows you to select a saved set of parameters from the drop down. 
-- New paramters added after the state was saved will retain their current value.  
+- New parameters added after the state was saved will retain their current value.
 - Selecting Current or cancel will revert to the value of all parameters when you entered the command.
 - Addin only saves the values of _User Defined_ parameters, not all model parameters
 
-**Edit Parameters** allows you to easily modify the values of all user parameters.  See realtime feedback on the changes.
+**Edit Parameters** allows you to easily modify the values of all user parameters.  See real time feedback on the changes.
 
 ### Delete States
 
