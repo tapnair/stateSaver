@@ -12,19 +12,9 @@ After downloading the zip file follow the [installation instructions here](https
 
 ## Usage:
 This addin allows you to save and retrieve:
- - The suppresion of features in the timeline 
  - The display of components in the graphics window
  - The values of user defined parameters in the design
 
-
-### Suppression State
-**Save Configuration** will save the current suppression state of all features in the timeline.
-
-**Switch Configuration** allows you to select a saved configuration from the drop down. The suppression state of features will revert to that previously saved condition.  
-- New features added after the state was saved will retain their current state.  
-- Selecting Current or cancel will revert to the suppression state of all components when you entered the command.
-
-**Unsuppress All** will simply unsuppress all features in the timeline.  This can be a useful utility when creating configurations.
 
 ### Display State
 **Save Display** will save the current display state (lightbulb on/off) of all _components_ in the timeline.
@@ -44,10 +34,11 @@ This addin allows you to save and retrieve:
 
 **Edit Parameters** allows you to easily modify the values of all user parameters.  See realtime feedback on the changes.
 
-## Limitations
-  * Currently no way to delete saved states
-  * Seen issues with more complex history trees failing when you unsuppress many features at once.
+### Delete States
 
+**Select Parameters or Display States** then check the boxes for the states you want to delete.
+
+Note: There is _no undo_ for this action
 
 ## License
 Samples are licensed under the terms of the [MIT License](http://opensource.org/licenses/MIT). Please see the [LICENSE](LICENSE) file for full details.
