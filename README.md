@@ -1,5 +1,5 @@
 # State Saver
-Fusion 360 Addin to Save Display,Suppresion and Parameter State
+Fusion 360 Addin to Save Display and Parameter States
 
 ![State Saver Dialog](./resources/configSaverMenu.png)
 
